@@ -74,3 +74,14 @@
 //     }
 // };
 
+
+//                    Sort 0s, 1s and 2s
+
+
+class Solution {
+  public:
+    void sort012(vector<int>& arr) {
+        // code here
+        sort(arr.begin(),arr.end());
+    }
+};
