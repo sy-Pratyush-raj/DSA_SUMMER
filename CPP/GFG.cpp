@@ -196,3 +196,21 @@
 //         return maxSum;
 //     }
 // };
+
+
+// First Repeated Character
+
+// class Solution {
+// public:
+//     string firstRepChar(string s) {
+//         unordered_set<char> st;
+
+//         for (char ch : s) {
+//             if (st.count(ch))
+//                 return string(1, ch);
+//             st.insert(ch);
+//         }
+
+//         return "-1";
+//     }
+// };
