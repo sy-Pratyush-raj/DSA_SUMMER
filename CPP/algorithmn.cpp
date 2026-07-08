@@ -69,3 +69,25 @@
 
 //  }  
 
+
+
+// Floyd loop detection -
+
+// Part 1 - Detect if loop exists
+//         - Fast and Slow pointer approach.
+//         - Initialize fast and slow at head.
+//         - Move slow by 1 step and fast by 2 steps until fast becomes NULL or fast->next becomes NULL.
+//         - If fast and slow become equal, loop exists.
+//         - Otherwise, no loop exists.
+
+// Part 2 - If loop exists, find the starting node of the loop
+//         - Re-initialize slow at head again.
+//         - Keep fast at the meeting point.
+//         - Move both slow and fast by 1 step.
+//         - Where they intersect (let's call it 'i') , that will be the starting node of the loop.
+
+// Part 3 - If loop exists, remove the loop
+//         - Create a temporary pointer (temp) at the starting node 'i'.
+//         - Move temp until temp->next becomes equal to the starting node 'i'.
+//         - Set temp->next = NULL.
+//         - The loop is removed.
