@@ -28,7 +28,7 @@ void  pop(){
         return;
     }
     top--;
-}
+};
 
 int main()
 {
