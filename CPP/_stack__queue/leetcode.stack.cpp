@@ -73,25 +73,49 @@
 // #include <unordered_map>
 // using namespace std;
 
+// class Solution {
+// public:
+//     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+//         unordered_map<int,int> mp;
+//         stack<int> st;
+
+//         for(int n : nums2){
+//             while(!st.empty() && st.top() < n){
+//                 mp[st.top()] = n;
+//                 st.pop();
+//             }
+//             st.push(n);
+//         }
+
+//         vector<int> ans;
+//         for(int n : nums1)
+//             ans.push_back(mp.count(n) ? mp[n] : -1);
+
+//         return ans;
+//     }
+// };
+
+
+//                84. Largest Rectangle in Histogram
+
+
 class Solution {
 public:
-    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        unordered_map<int,int> mp;
+    int largestRectangleArea(vector<int>& heights) {
         stack<int> st;
+        int n = heights.size(), area = 0;
 
-        for(int n : nums2){
-            while(!st.empty() && st.top() < n){
-                mp[st.top()] = n;
+        for(int i = 0; i <= n; i++) {
+            int h = (i == n ? 0 : heights[i]);
+
+            while(!st.empty() && heights[st.top()] > h) {
+                int height = heights[st.top()];
                 st.pop();
+                int width = st.empty() ? i : i - st.top() - 1;
+                area = max(area, height * width);
             }
-            st.push(n);
+            st.push(i);
         }
-
-        vector<int> ans;
-        for(int n : nums1)
-            ans.push_back(mp.count(n) ? mp[n] : -1);
-
-        return ans;
+        return area;
     }
 };
-
