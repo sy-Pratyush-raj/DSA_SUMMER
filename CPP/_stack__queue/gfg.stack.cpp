@@ -86,3 +86,63 @@
 // };
 
 
+//      Interleave the First Half of the Queue with Second Half
+
+
+
+class Solution {
+  public:
+    void rearrangeQueue(queue<int> &q) {
+        
+        stack<int> st;
+        int halfSize = q.size()/2;
+        
+        // push the first half elements in stack
+        // queue : 16 17 18 19 20 || stack : 15 14 13 12 11
+        for(int i = 0; i < halfSize; i++){
+            st.push(q.front());
+            q.pop();
+        }
+        
+        // enqueue back the stack elements in queue
+        // queue : 16 17 18 19 20 15 14 13 12 11
+        while(!st.empty()){
+            q.push(st.top());
+            st.pop();
+        }
+        
+        // dequeue the first half elements of queue and enqueue them back
+        // queue : 15 14 13 12 11 16 17 18 19 20
+        for(int i = 0; i < halfSize; i++){
+            q.push(q.front());
+            q.pop();
+        }
+        
+        // again push the first half elements in stack
+        // queue : 16 17 18 19 20 || stack : 11 12 13 14 15
+        for(int i = 0; i < halfSize; i++){
+            st.push(q.front());
+            q.pop();
+        }
+        
+        // interleave the stack and queue elements
+        // stack : 11 12 13 14 15
+        // queue : 16 17 18 19 20
+        while(!st.empty()){
+            
+            // push top element of stack
+            // queue : 16 17 18 19 20 11
+            q.push(st.top());
+            st.pop();
+            
+            // push front element of queue
+            // queue : 17 18 19 20 11 16
+            q.push(q.front());
+            q.pop();
+        }
+        
+        // final queue :
+        // 11 16 12 17 13 18 14 19 15 20
+    }
+};
+
