@@ -1,12 +1,21 @@
 //                       Reverse first K of a Queue
 
 
+#include<iostream>
+#include <stack>
+#include <queue>
+using namespace std;
+
 class Solution {
 public:
     queue<int> reverseFirstK(queue<int> q, int k) {
 
-        stack<int> st;
         int n = q.size();
+
+        if (k > n || k <= 0)
+            return q;
+
+        stack<int> st;
 
         // Push first k elements into stack
         for (int i = 0; i < k; i++) {
@@ -20,7 +29,7 @@ public:
             st.pop();
         }
 
-        // Move the remaining elements to the back
+        // Move remaining elements to the back
         for (int i = 0; i < n - k; i++) {
             q.push(q.front());
             q.pop();
