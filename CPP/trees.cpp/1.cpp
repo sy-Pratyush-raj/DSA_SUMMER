@@ -13,3 +13,19 @@ public:
         right = NULL;
     }
 };
+
+void preorder(Node* root){
+     if(root == NULL){
+        return;
+    }
+
+    // Visit Root
+    cout << root->data << " ";
+
+    // Traverse Left Subtree
+    preorder(root->left);
+
+    // Traverse Right Subtree
+    preorder(root->right);
+
+}
