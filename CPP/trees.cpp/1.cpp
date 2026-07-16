@@ -28,4 +28,26 @@ void preorder(Node* root){
     // Traverse Right Subtree
     preorder(root->right);
 
+
+
+int countNode(Node* root){
+    if(root==NULL){
+        return 0;
+    }
+
+    int x = countNodes(root->left);
+    int y = countNodes(root->right);
+
+    return 1 + x + y;
+}
+
+int main(){
+    Node* root = new Node(1);
+
+    root->left = new Node(2);
+    root->right = new Node(3);
+
+    root->left->left = new Node(4);
+}
+
 }
