@@ -41,6 +41,19 @@ int countNode(Node* root){
     return 1 + x + y;
 }
 
+
+int countLeaf(Node* root){
+    //base case
+    if(root==NULL) return 0;
+
+    if(root->left == NULL && root->right==NULL) return 1;
+
+    int x = countLeaf(root->left);
+    int y = countLeaf(root->right);
+    return x + y ;
+
+}
+
 int main(){
     Node* root = new Node(1);
 
