@@ -17,4 +17,51 @@
 
 //                         Top View of Binary Tree
 
+class Solution {
+  public:
+    vector<int> topView(Node *root) {
 
+        vector<int> ans;
+
+        if(root == NULL)
+            return ans;
+
+        // key = Horizontal Distance
+        // value = Node data
+        map<int, int> topNode;
+
+        // Queue stores {Node, Horizontal Distance}
+        queue<pair<Node*, int>> q;
+
+        q.push({root, 0});
+
+        while(!q.empty()){
+
+            pair<Node*, int> temp = q.front();
+            q.pop();
+
+            Node* frontNode = temp.first;
+            int hd = temp.second;
+
+            // Store only the first node at each HD
+            if(topNode.find(hd) == topNode.end()){
+                topNode[hd] = frontNode->data;
+            }
+
+            if(frontNode->left){
+                q.push({frontNode->left, hd - 1});
+            }
+
+            if(frontNode->right){
+                q.push({frontNode->right, hd + 1});
+            }
+        }
+
+        // Store answer from leftmost HD to rightmost HD
+        for(auto it : topNode){
+            ans.push_back(it.second);
+        }
+
+        return ans;
+    }
+};
