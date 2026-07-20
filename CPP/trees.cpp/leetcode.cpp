@@ -305,3 +305,75 @@ public:
         return false;
     }
 };
+
+
+//              230. Kth Smallest Element in a BST
+
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        stack<TreeNode*> st;
+
+        while(true){
+            while(root){
+                st.push(root);
+                root = root->left;
+            }
+
+            root = st.top(); 
+            st.pop();
+
+            if(--k == 0) return root->val;
+
+            root = root->right;
+        }
+    }
+};
+
+//            98. Validate Binary Search Tree
+
+class Solution {
+public:
+    bool check(TreeNode* root, long long low, long long high){
+        if(!root) return true;
+
+        if(root->val <= low || root->val >= high)
+            return false;
+
+        return check(root->left, low, root->val) &&
+               check(root->right, root->val, high);
+    }
+
+    bool isValidBST(TreeNode* root) {
+        return check(root, LLONG_MIN, LLONG_MAX);
+    }
+};
+
+
+//                    450. Delete Node in a BST
+
+
+class Solution {
+public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(!root) return NULL;
+
+        if(key < root->val) {
+            root->left = deleteNode(root->left, key);
+        }
+        else if(key > root->val) {
+            root->right = deleteNode(root->right, key);
+        }
+        else {
+            if(!root->left) return root->right;
+            if(!root->right) return root->left;
+
+            TreeNode* temp = root->right;
+            while(temp->left) temp = temp->left;  
+            
+            root->val = temp->val;
+            root->right = deleteNode(root->right, temp->val);
+        }
+        return root;
+    }
+};
